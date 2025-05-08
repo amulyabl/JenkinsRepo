@@ -2,6 +2,7 @@ pipeline{
  agent any;
   stages{
     stage('BUILD'){
+     agent{ label 'c-project-node' }
       steps{
         echo "This is Build Stage"
       }
