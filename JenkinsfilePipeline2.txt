@@ -6,6 +6,7 @@ pipeline{
         echo 'Build stage'
     }
   }
+  stage('PARALLEL STAGE'){
   parallel{
     stage('TEST SAFARI'){
         steps{
@@ -17,6 +18,7 @@ pipeline{
             echo 'Test on Chrome'
         }
     }
+  }
   }
   stage ('TEST'){
     steps{
