@@ -4,6 +4,7 @@ pipeline{
   stage ('BUILD'){
     steps{
         echo 'Build stage'
+        sleep 20
     }
   }
   stage('PARALLEL STAGE'){
@@ -11,11 +12,13 @@ pipeline{
     stage('TEST SAFARI'){
         steps{
             echo 'Test on Safari'
+            sleep 20
         }
     }
      stage('TEST CROME'){
         steps{
             echo 'Test on Chrome'
+            sleep 20
         }
     }
   }
