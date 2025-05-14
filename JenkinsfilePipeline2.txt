@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('BUILD') {
             steps {
-                echo 'Build stage $DB_NAME'
+                echo 'Build stage ${DB_NAME}'
                 //sleep 20
             }
         }
