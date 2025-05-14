@@ -1,39 +1,43 @@
-pipeline{
-  agent any
-  stages{
-  stage ('BUILD'){
-    steps{
-        echo 'Build stage'
-        sleep 20
+pipeline {
+    agent any
+    environment {
+        DB_NAME = 'TEST'
     }
-  }
-  stage('PARALLEL STAGE'){
-  parallel{
-    stage('TEST SAFARI'){
-        steps{
-            echo 'Test on Safari'
-            sleep 20
+
+    stages {
+        stage('BUILD') {
+            steps {
+                echo 'Build stage $DB_NAME'
+                //sleep 20
+            }
+        }
+        stage('PARALLEL STAGE') {
+            parallel {
+                stage('TEST SAFARI') {
+                    steps {
+                        echo 'Test on Safari'
+                       // sleep 20
+                    }
+                }
+                stage('TEST CROME') {
+                    /* groovylint-disable-next-line NestedBlockDepth */
+                    steps {
+                        echo 'Test on Chrome'
+                       // sleep 20
+                    }
+                }
+            }
+        }
+        stage('TEST') {
+            steps {
+                echo 'Test stage'
+            }
+        }
+        stage('DEPLOY') {
+            steps {
+                echo 'Deploy stage'
+            }
         }
     }
-     stage('TEST CROME'){
-        steps{
-            echo 'Test on Chrome'
-            sleep 20
-        }
-    }
-  }
-  }
-  stage ('TEST'){
-    steps{
-        echo 'Test stage'
-    }
-  }
-  stage ('DEPLOY'){
-    steps{
-        echo 'Deploy stage'
-    }
-  }
-  }
-  
 
 }
