@@ -3,6 +3,9 @@ pipeline {
     environment {
         DB_NAME = 'TEST'
     }
+    parameters {
+        string defaultValue: 'UAT', description: 'Deploy in the application in this env', name: 'ENV', trim: true
+    }
 
     stages {
         stage('BUILD') {
@@ -38,9 +41,8 @@ pipeline {
         }
         stage('DEPLOY') {
             steps {
-                echo 'Deploy stage'
+                echo "Deploy stage $params.ENV"
             }
         }
     }
 }
-
