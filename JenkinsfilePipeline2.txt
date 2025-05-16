@@ -18,7 +18,7 @@ pipeline {
             parallel {
                 stage('TEST SAFARI') {
                     steps {
-                        echo 'Test on Safari'
+                        echo "Test on Safari $DB_NAME"
                     // sleep 20
                     }
                 }
