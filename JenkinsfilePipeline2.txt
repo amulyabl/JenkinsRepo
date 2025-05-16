@@ -5,10 +5,10 @@ pipeline {
     }
 
     stages {
-        environment {
-            DB_NAME = 'PROD'
-        }
         stage('BUILD') {
+            environment {
+                DB_NAME = 'PROD'
+            }
             steps {
                 echo "Build stage $DB_NAME"
             //sleep 20
