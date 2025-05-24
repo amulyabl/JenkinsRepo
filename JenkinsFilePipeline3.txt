@@ -14,8 +14,7 @@ pipeline {
                             try {
                                 echo 'Test Stage PRD'
                                 exit 1
-                            }
-                        catch (e) {
+                            }catch (e) {
                                 echo "Failure in test PROD ${e}"
                         }
                         }
@@ -27,8 +26,7 @@ pipeline {
                             try {
                                 echo 'Test Stage NON PROD'
                                // exit 1
-                            }
-                            catch (e) {
+                            }catch (e) {
                                 echo "Failure in test NON PROD ${e}"
                             }
                         }
