@@ -24,7 +24,6 @@ pipeline {
                           }
                     }
                 }
-            }
                 stage('Test NON PROD') {
                     steps {
                          // script {
@@ -41,8 +40,8 @@ pipeline {
                          }
                     }
                 }
+            }
         }
-    }
         stage('Deploy') {
             steps {
                 echo 'Deploy Stage'
