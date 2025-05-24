@@ -10,14 +10,28 @@ pipeline {
             parallel {
                 stage('Test PROD') {
                     steps {
-                        echo 'Test Stage PRD'
-                    // exit 1;
+                        script {
+                            try {
+                                echo 'Test Stage PRD'
+                                exit 1
+                            }
+                        catch (e) {
+                                echo "Failure in test PROD ${e}"
+                        }
+                        }
                     }
                 }
                 stage('Test NON PROD') {
                     steps {
-                        echo 'Test Stage NON PROD'
-                        exit 1
+                        script {
+                            try {
+                                echo 'Test Stage NON PROD'
+                               // exit 1
+                            }
+                            catch (e) {
+                                echo "Failure in test NON PROD ${e}"
+                            }
+                        }
                     }
                 }
             }
