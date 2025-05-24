@@ -10,35 +10,44 @@ pipeline {
             parallel {
                 stage('Test PROD') {
                     steps {
-                        script {
-                            try {
-                                echo 'Test Stage PRD'
-                               sh 'exit 1'
-                            } catch (e) {
-                                echo "Failure in test PROD ${e}"
-                        }
-                        }
-                    }
-                }
-                stage('Test NON PROD') {
-                    steps {
-                        script {
-                            try {
-                                echo 'Test Stage NON PROD'
-                               // exit 1
-                            } catch (e) {
-                                echo "Failure in test NON PROD ${e}"
-                            }
-                        }
+                          // script {
+                          //     try {
+                          //         echo 'Test Stage PRD'
+                          //        sh 'exit 1'
+                          //     } catch (e) {
+                          //         echo "Failure in test PROD ${e}"
+                          // }
+                          // }
+                          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                             echo 'Test Stage PRD'
+                             sh 'exit 1'
+                          }
                     }
                 }
             }
+                stage('Test NON PROD') {
+                    steps {
+                         // script {
+                         //     try {
+                         //         echo 'Test Stage NON PROD'
+                         //        // exit 1
+                         //     } catch (e) {
+                         //         echo "Failure in test NON PROD ${e}"
+                         //     }
+                         // }
+                         catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            echo 'Test Stage PRD'
+                            sh 'exit 1'
+                         }
+                    }
+                }
         }
+    }
         stage('Deploy') {
             steps {
                 echo 'Deploy Stage'
             // exit 1;
             }
         }
-    }
+}
 }
