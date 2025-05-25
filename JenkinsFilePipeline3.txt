@@ -36,6 +36,7 @@ pipeline {
                          // }
                          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                             echo 'Test Stage PRD'
+                            sh 'exit 1'
                          }
                     }
                 }
