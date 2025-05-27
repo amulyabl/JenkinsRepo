@@ -1,0 +1,36 @@
+pipeline{
+    agent any
+    stages{
+        stage('BUILD'){
+            steps{
+                echo 'Build Stage'
+            }
+        }
+        stage('Parallel TEST'){
+            parallel{
+                stage('NON PROD TEST'){
+                    steps{
+                      catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE'){
+                        echo 'NON PROD TEST '
+                        sh 'exit 1'
+                      }  
+                    }
+                }
+                stage('PROD TEST'){
+                    steps{
+                      catchError(buildResult: 'SUCCESS', stageResult: 'SUCCESS'){
+                        echo 'PROD TEST '
+                        sh 'exit 0'
+                      }  
+                    }
+                }
+            }
+        }
+        stage('DEPLOY'){
+            steps{
+                echo 'DEPLOY stage'
+            }
+
+        }
+    }
+}
